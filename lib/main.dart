@@ -48,9 +48,95 @@ class _CaptchaTypingScreenState extends State<_CaptchaTypingScreen> {
 
   void checkCode(String input) {
     if (input == generatedCode) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            contentPadding: EdgeInsets.zero,
+            content: Container(
+              width: 300, // Adjust the width as needed
+              height: 280, // Adjust the height as needed
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assetsimages/successML.jpg'),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+                        child: Text(
+                          'SUCCESS',
+                          style: GoogleFonts.play(fontSize: 40.0, fontWeight: FontWeight.w900, color: Colors.black, letterSpacing: 10),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 48, // Adjust the height of the buttons row
+                    padding: const EdgeInsets.all(8.0), // Adjust padding as needed
+                    color:  Color(0xff000000), // Set background color to white
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                            minimumSize: MaterialStateProperty.all<Size>(Size(100, 40)), // Set button size
+                          ),
+                          child: Text('Go Back',
+                              style: GoogleFonts.play(color: Colors.white, fontSize: 15)
+                          ),
+                        ),
+                        VerticalDivider(
+                          color: Colors.white, // Set the color of the divider
+                          thickness: 1, // Set the thickness of the divider
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const MainPage()),
+                            );
+                          },
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                            minimumSize: MaterialStateProperty.all<Size>(Size(100, 40)), // Set button size
+                          ),
+                          child: Text('Continue',
+                          style: GoogleFonts.play(color: Colors.white, fontSize: 15),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            backgroundColor: Colors.transparent, // Make background transparent
+            contentTextStyle: TextStyle(color: Colors.transparent), // Text color
+            titleTextStyle: TextStyle(color: Colors.transparent), // Title text color
+            actionsPadding: EdgeInsets.zero, // Padding for the actions
+            actions: <Widget>[], // No actions in this case
+            titlePadding: EdgeInsets.zero, // Padding for the title
+            insetPadding: EdgeInsets.zero, // Inset padding
+            elevation: 0, // No elevation
+            scrollable: false, // Not scrollable
+            clipBehavior: Clip.antiAlias, // Clip content to the shape
+          );
+        },
       );
     } else {
       showDialog(
@@ -73,6 +159,7 @@ class _CaptchaTypingScreenState extends State<_CaptchaTypingScreen> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +174,7 @@ class _CaptchaTypingScreenState extends State<_CaptchaTypingScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage('https://www.pixel4k.com/wp-content/uploads/2019/10/super-mario-nintendo_1572370059.jpg'), // Replace 'background_image.jpg' with your image asset path
+            image: AssetImage('assetsimages/mario.jpg'), // Replace 'background_image.jpg' with your image asset path
             fit: BoxFit.cover, // Adjust the fit as needed
           ),
         ),
